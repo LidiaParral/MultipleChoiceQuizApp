@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MultipleChoiceQuizApp</string>
+    <string name="tv_title">My Quiz</string>
+    <string name="btn_start">Start quiz</string>
+    <string name="tv_highscore">Highscore : 0</string>
+    <string name="tv_score">Score : 0</string>
+    <string name="tv_question">Question : 1/x</string>
+    <string name="tv_time">00:30</string>
+    <string name="rb_option1">Option 1</string>
+    <string name="rb_option2">Option2</string>
+    <string name="rb_option3">Option 3</string>
+    <string name="rb_option4">Option 4</string>
+    <string name="tv_q">¿Question?</string>
+    <string name="btn_conf">Confirm</string>
+</resources>
