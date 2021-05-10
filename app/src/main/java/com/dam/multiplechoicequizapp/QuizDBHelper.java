@@ -16,7 +16,7 @@ import java.util.List;
 public class QuizDBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MyQuiz.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private SQLiteDatabase db;
 

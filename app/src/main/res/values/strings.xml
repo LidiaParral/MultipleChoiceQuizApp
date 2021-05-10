@@ -12,4 +12,5 @@
     <string name="rb_option4">Option 4</string>
     <string name="tv_q">¿Question?</string>
     <string name="btn_conf">Confirm</string>
+    <string name="tv_difficulty">"Difficulty: "</string>
 </resources>

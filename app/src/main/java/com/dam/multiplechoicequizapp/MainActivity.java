@@ -7,17 +7,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_QUIZ = 1;
+    public static final String EXTRA_DIFFICULTY = "ExtraDifficulty";
 
     public static final String SHARED_PREFER = "SharedPrefer";
     public static final String KEY_HIGHSCORE = "KeyHighscore";
 
     private TextView tvHighscore;
+    private Spinner spinnerDifficulty;
 
     private int highscore;
 
@@ -28,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         tvHighscore = findViewById(R.id.tvHighscore);
+        spinnerDifficulty = findViewById(R.id.spinnerDifficulty);
+
+        String [] difficultyLevels = Question.getAllDifficultyLevels();
+
+        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<String>( this,
+                android.R.layout.simple_spinner_item, difficultyLevels);
+        adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDifficulty.setAdapter(adapterDifficulty);
+
         loadHighscore();
 
         Button btnStart = findViewById(R.id.btnStart);
@@ -40,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startQuiz() {
+        String difficulty = spinnerDifficulty.getSelectedItem().toString();
+
         Intent i = new Intent(MainActivity.this, Quiz.class);
+        i.putExtra(EXTRA_DIFFICULTY, difficulty);
         startActivityForResult(i, REQUEST_CODE_QUIZ);
     }
 

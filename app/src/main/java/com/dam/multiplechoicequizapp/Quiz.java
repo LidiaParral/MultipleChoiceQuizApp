@@ -38,6 +38,7 @@ public class Quiz extends AppCompatActivity {
     private TextView tvScore;
     private TextView tvQuestionC;
     private TextView tvTime;
+    private TextView tvDifficulty;
     private RadioGroup rbGroup;
     private RadioButton rb1;
     private RadioButton rb2;
@@ -72,6 +73,7 @@ public class Quiz extends AppCompatActivity {
         tvScore = findViewById(R.id.tvScore);
         tvQuestionC = findViewById(R.id.tvQuestionC);
         tvTime = findViewById(R.id.tvTime);
+        tvDifficulty = findViewById(R.id.tvQuestionDifficulty);
         rbGroup = findViewById(R.id.RadioGroup);
         rb1 = findViewById(R.id.rbOption1);
         rb2 = findViewById(R.id.rbOption2);
@@ -83,10 +85,14 @@ public class Quiz extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = tvTime.getTextColors();
 
+        Intent i = getIntent();
+        String difficulty = i.getStringExtra(MainActivity.EXTRA_DIFFICULTY);
+
+        tvDifficulty.setText("Difficulty: " +  difficulty);
 
         if(savedInstanceState == null) {
             QuizDBHelper dbHelper = new QuizDBHelper(this);
-            questionList = dbHelper.getQuestions("Medium");
+            questionList = dbHelper.getQuestions(difficulty);
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
 
