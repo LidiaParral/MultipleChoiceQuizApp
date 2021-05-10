@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_CODE_QUIZ){
-            if(resultCode == RESULT_OK){
+        if (requestCode == REQUEST_CODE_QUIZ) {
+            if (resultCode == RESULT_OK) {
                 int score = data.getIntExtra(Quiz.EXTRA_SCORE, 0);
-                if(score > highscore){
+                if (score > highscore) {
                     updateHighscore(score);
                 }
             }
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadHighscore(){
+    private void loadHighscore() {
         SharedPreferences preferences = getSharedPreferences(SHARED_PREFER, MODE_PRIVATE);
         highscore = preferences.getInt(KEY_HIGHSCORE, 0);
         tvHighscore.setText("Highscore: " + highscore);

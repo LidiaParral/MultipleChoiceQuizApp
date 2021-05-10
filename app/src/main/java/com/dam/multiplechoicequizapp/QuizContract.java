@@ -4,7 +4,8 @@ import android.provider.BaseColumns;
 
 public final class QuizContract {
 
-    private QuizContract() {}
+    private QuizContract() {
+    }
 
     public static class QuestionTable implements BaseColumns {
         public static final String TABLE_NAME = "quiz_questions";
@@ -14,6 +15,7 @@ public final class QuizContract {
         public static final String COLUMN_OPTION3 = "option3";
         public static final String COLUMN_OPTION4 = "option4";
         public static final String COLUMN_ANSWER = "answer";
+        public static final String COLUMN_DIFFICULTY = "difficulty";
 
 
     }
