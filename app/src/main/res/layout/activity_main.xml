@@ -8,6 +8,11 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    //*Multiple Choice Quiz App with SQLite
+    Integration Part 11 - CATEGORIES
+    - Android Studio Tutorial*//
+
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
