@@ -15,6 +15,8 @@ import java.util.List;
 
 public class QuizDBHelper extends SQLiteOpenHelper {
 
+    //Multiple Choice Quiz App with SQLite Integration Part 11 - CATEGORIES - Android Studio Tutorial
+
     private static final String DATABASE_NAME = "MyQuiz.db";
     private static final int DATABASE_VERSION = 2;
 
@@ -27,6 +29,11 @@ public class QuizDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
+        final String SQL_CREATE_CATEGORIES_TABLE = "CREATE TABLE" +
+                CategoriesTable.TABLE_NAME + "(" +
+                CategoriesTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                CategoriesTable.COLUMN_NAME + " TEXT " +
+                ")";
 
         final String SQL_CREATE_QUESTION_TABLE = "CREATE TABLE " +
                 QuestionTable.TABLE_NAME + " ( " +
@@ -37,22 +44,57 @@ public class QuizDBHelper extends SQLiteOpenHelper {
                 QuestionTable.COLUMN_OPTION3 + " TEXT, " +
                 QuestionTable.COLUMN_OPTION4 + " TEXT, " +
                 QuestionTable.COLUMN_ANSWER + " INTEGER," +
-                QuestionTable.COLUMN_DIFFICULTY + " TEXT" +
+                QuestionTable.COLUMN_DIFFICULTY + " TEXT, " +
+                QuestionTable.COLUMN_CATEGORY_ID + " INTEGER, " +
+                " FOREIGN KEY(" +  QuestionTable.COLUMN_CATEGORY_ID + ") REFERENCES " +
+                CategoriesTable.TABLE_NAME + "(" + CategoriesTable._ID + ")" + " ON DELETE CASCADE " +
                 ")";
 
+
+        db.execSQL(SQL_CREATE_CATEGORIES_TABLE);
         db.execSQL(SQL_CREATE_QUESTION_TABLE);
+        fillCategoriesTable();
         fillQuestionTable();
+        
     }
+
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + CategoriesTable.TABLE_NAME);
+        onCreate(db);
         db.execSQL("DROP TABLE IF EXISTS " + QuestionTable.TABLE_NAME);
         onCreate(db);
     }
 
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    private void fillCategoriesTable() {
+        Category c1 = new Category("Plastic");
+        addCategory(c1);
+        Category c2 = new Category("Glass");
+        addCategory(c2);
+        Category c3 = new Category("Paper");
+        addCategory(c3);
+    }
+
+    private void addCategory(Category category) {
+        ContentValues cv = new ContentValues();
+        cv.put(CategoriesTable.COLUMN_NAME, category.getName());
+        db.insert(CategoriesTable.TABLE_NAME, null, cv);
+    }
+
+
+
+
     private void fillQuestionTable() {
-        Question q1 = new Question("Easy: A is correct", "A", "B", "C", "D", 1,Question.DIFFICULTY_EASY);
+        Question q1 = new Question("Easy: A is correct", "A", "B", "C", "D", 1,Question.DIFFICULTY_EASY,);
         addQuestion(q1);
         Question q2 = new Question("Medium: A is correct", "A", "B", "C", "D", 1,Question.DIFFICULTY_MEDIUM);
         addQuestion(q2);
@@ -64,6 +106,7 @@ public class QuizDBHelper extends SQLiteOpenHelper {
         addQuestion(q5);
 
     }
+
 
     private void addQuestion(Question question) {
         ContentValues cv = new ContentValues();
