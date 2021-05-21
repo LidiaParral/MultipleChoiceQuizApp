@@ -35,6 +35,15 @@
         android:textColor="@color/black"
         android:freezesText="true"/>
 
+    <TextView
+        android:id="@+id/tvQuestionCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvQuestionDifficulty"
+        android:text="@string/tv_category"
+        android:textColor="@color/black"
+        android:freezesText="true"/>
+
 
 
     <TextView

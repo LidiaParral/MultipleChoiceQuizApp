@@ -46,6 +46,19 @@ public class Question implements Parcelable {
         categoryId = in.readInt();
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(question);
+        dest.writeString(option1);
+        dest.writeString(option2);
+        dest.writeString(option3);
+        dest.writeString(option4);
+        dest.writeInt(answer);
+        dest.writeString(difficulty);
+        dest.writeInt(categoryId);
+    }
+
     public static final Creator<Question> CREATOR = new Creator<Question>() {
         @Override
         public Question createFromParcel(Parcel in) {
@@ -63,18 +76,7 @@ public class Question implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(question);
-        dest.writeString(option1);
-        dest.writeString(option2);
-        dest.writeString(option3);
-        dest.writeString(option4);
-        dest.writeInt(answer);
-        dest.writeString(difficulty);
-        dest.writeInt(categoryId);
-    }
+
 
     public int getId() {
         return id;

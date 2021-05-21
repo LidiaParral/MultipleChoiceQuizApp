@@ -36,16 +36,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:layout_below="@id/tvHighscore"/>
 
-
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/spinnerDifficulty"/>
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginBottom="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:text="@string/btn_start" />
 
 

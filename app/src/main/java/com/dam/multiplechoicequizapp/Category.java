@@ -10,7 +10,6 @@ public class Category {
     private String name;
 
     public Category(){
-
     }
 
     public Category(String name) {
@@ -31,5 +30,11 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

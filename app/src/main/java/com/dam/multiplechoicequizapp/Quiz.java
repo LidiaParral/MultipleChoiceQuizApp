@@ -39,6 +39,7 @@ public class Quiz extends AppCompatActivity {
     private TextView tvQuestionC;
     private TextView tvTime;
     private TextView tvDifficulty;
+    private TextView tvCategory;
     private RadioGroup rbGroup;
     private RadioButton rb1;
     private RadioButton rb2;
@@ -74,6 +75,7 @@ public class Quiz extends AppCompatActivity {
         tvQuestionC = findViewById(R.id.tvQuestionC);
         tvTime = findViewById(R.id.tvTime);
         tvDifficulty = findViewById(R.id.tvQuestionDifficulty);
+        tvCategory = findViewById(R.id.tvQuestionCategory);
         rbGroup = findViewById(R.id.RadioGroup);
         rb1 = findViewById(R.id.rbOption1);
         rb2 = findViewById(R.id.rbOption2);
@@ -86,13 +88,16 @@ public class Quiz extends AppCompatActivity {
         textColorDefaultCd = tvTime.getTextColors();
 
         Intent i = getIntent();
+        int categoryID = i.getIntExtra(MainActivity.EXTRA_CATEGORY_ID,0);
+        String categoryName = i.getStringExtra(MainActivity.EXTRA_CATEGORY_NAME);
         String difficulty = i.getStringExtra(MainActivity.EXTRA_DIFFICULTY);
 
+        tvCategory.setText("Category: " +  categoryName);
         tvDifficulty.setText("Difficulty: " +  difficulty);
 
         if(savedInstanceState == null) {
-            QuizDBHelper dbHelper = new QuizDBHelper(this);
-            questionList = dbHelper.getQuestions(difficulty);
+            QuizDBHelper dbHelper = QuizDBHelper.getInstance(this);
+            questionList = dbHelper.getQuestions(categoryID,difficulty);
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
 
@@ -174,7 +179,7 @@ public class Quiz extends AppCompatActivity {
                 break;
             case 4:
                 rb4.setTextColor(Color.GREEN);
-                tvQuestion.setText("Anser 4 is correct");
+                tvQuestion.setText("Answer 4 is correct");
                 break;
 
         }
